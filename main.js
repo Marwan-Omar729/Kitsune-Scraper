@@ -1,4 +1,4 @@
-#!usr/bin node
+#!usr/bin/env node
 
 import { parse } from "./core/parse.js";
 import { Command } from "commander";
@@ -13,12 +13,10 @@ app
     .usage("kitsunescraper [command] [options]");
 
 app
-    .command("web")
-    .argument("-u, url [Target]")
-    .action((web, options) => {
+    .command("web [url] [items]")
+    .action(async (url, items) => {
 
-        console.log(Chalk.white("[ * ] Go to: "), options.url);
+        console.log(Chalk.white("[ * ] Go to: "), url);
+         await parse(items, url)
 
     });
-
-(async () => await parse('p', "http://books.toscrape.com"))();
